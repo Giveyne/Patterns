@@ -1,91 +1,57 @@
 package Singlton;
 
-import java.util.concurrent.Executor;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
-import java.util.concurrent.ThreadPoolExecutor;
-
+// Различные реализации синглтонов
 public class ProgramRuner {
     private static String pole = "aaa";
     public static void main(String[] args) {
-
-
+    // Логер синлтон для записи логов
         SingltonLogger sin = SingltonLogger.getSingltonLogger();
-        SingltonLogger.getSingltonLogger().addLogInfo("First log");
-        SingltonLogger.getSingltonLogger().addLogInfo("2 log");
-        SingltonLogger.getSingltonLogger().addLogInfo("3 log");
-        SingltonLogger.getSingltonLogger().addLogInfo("4 log");
-        SingltonLogger.getSingltonLogger().showLogFile();
-        System.out.println(sin.toString());
-
-        LazySinglton io1 = LazySinglton.getInstance();
+             SingltonLogger.getSingltonLogger().addLogInfo("First log");
+             SingltonLogger.getSingltonLogger().addLogInfo("2 log");
+             SingltonLogger.getSingltonLogger().addLogInfo("3 log");
+             SingltonLogger.getSingltonLogger().addLogInfo("4 log");
+             SingltonLogger.getSingltonLogger().showLogFile();
+                System.out.println(sin.toString());
+// Ленивая реализация синглтона
+        LazySinglton io1 = LazySinglton.getInstance();// создаем 1й
         System.out.println(io1.toString());
-        LazySinglton io2 = LazySinglton.getInstance();
+        LazySinglton io2 = LazySinglton.getInstance();// пытаемся создать 2ой но получаем 1й
         System.out.println(io2.toString());
-        ExecutorService service = Executors.newFixedThreadPool(4);
 
-        Thread i1 = new Thread(()-> {
+        ExecutorService service = Executors.newFixedThreadPool(4);
+        service.submit(new Thread(()-> {
+            System.out.println(Thread.currentThread().getName());
             SingltonUser singltonUser = SingltonUser.getGetSingltonUser();
             System.out.println(singltonUser.toString());
-        });
-        Thread i2 = new Thread(()-> {
+            }));
+        service.submit(new Thread(()-> {
             SingltonUser singltonUser1 = SingltonUser.getGetSingltonUser();
             System.out.println(singltonUser1.toString());
-        });
-        Thread i3 = new Thread(()-> {
+        }));
+        service.submit(new Thread(()-> {
             SingltonUser singltonUser2 = SingltonUser.getGetSingltonUser();
             System.out.println(singltonUser2.toString());
-        });
-        Thread i4 = new Thread(()-> {
+        }));
+        service.submit(new Thread(()-> {
             SingltonUser singltonUser3 = SingltonUser.getGetSingltonUser();
             System.out.println(singltonUser3.toString());
-        });
-        Thread i5 = new Thread(()-> {
+        }));
+        service.submit(new Thread(()-> {
             SingltonUser singltonUser4 = SingltonUser.getGetSingltonUser();
             System.out.println(singltonUser4.toString());
-        });
-        Thread i6 = new Thread(()-> {
-            SingltonUser singltonUser = SingltonUser.getGetSingltonUser();
-            System.out.println(singltonUser.toString());
-        });
-        Thread i7 = new Thread(()-> {
-            SingltonUser singltonUser1 = SingltonUser.getGetSingltonUser();
-            System.out.println(singltonUser1.toString());
-        });
-        Thread i8 = new Thread(()-> {
-            SingltonUser singltonUser2 = SingltonUser.getGetSingltonUser();
-            System.out.println(singltonUser2.toString());
-        });
-        Thread i9 = new Thread(()-> {
-            SingltonUser singltonUser3 = SingltonUser.getGetSingltonUser();
-            System.out.println(singltonUser3.toString());
-        });
-        Thread i10 = new Thread(()-> {
-            SingltonUser singltonUser4 = SingltonUser.getGetSingltonUser();
-            System.out.println(singltonUser4.toString());
-        });
-        i1.start();
-        i2.start();
-        i3.start();
-        i4.start();
-        i5.start();
-        i6.start();
-        i7.start();
-        i8.start();
-        i9.start();
-        i10.start();
+        }));
+       service.shutdown();
+
+        EnumSinglton obj1 = EnumSinglton.INSTANCE;
+        obj1.someInteger = 1;
+        obj1.getInstanse();
+        EnumSinglton obj2 = EnumSinglton.INSTANCE;
+        obj2.someInteger = 2;
+        obj1.getInstanse();
+
+
     }
 }
-//        Singlton.LazySinglton@74a14482
-//        Singlton.LazySinglton@74a14482
 
-//        Singlton.SingltonUser@7858e8ff
-//        Singlton.SingltonUser@7858e8ff
-//        Singlton.SingltonUser@7858e8ff
-//        Singlton.SingltonUser@7858e8ff
-//        Singlton.SingltonUser@7858e8ff
-//        Singlton.SingltonUser@7858e8ff
-//        Singlton.SingltonUser@7858e8ff
-//        Singlton.SingltonUser@7858e8ff
-//        Singlton.SingltonUser@7858e8ff
-//        Singlton.SingltonUser@7858e8ff

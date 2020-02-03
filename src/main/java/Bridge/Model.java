@@ -1,4 +1,5 @@
 package Bridge;
 
-public class Model {
+public interface Model {
+    void drive(String str);
 }
