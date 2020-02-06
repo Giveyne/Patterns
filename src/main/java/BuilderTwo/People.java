@@ -4,10 +4,10 @@ public class People {
     private final String name;
     private final Integer age;
     private final String sex;
-    public People (Builder builder){
-        this.name = builder.name;
-        this.age = builder.age;
-        this.sex = builder.sex;
+    public People (String name, Integer age, String sex){
+        this.name = name;
+        this.age = age;
+        this.sex = sex;
     }
 
     public String getName() {
@@ -30,7 +30,9 @@ public class People {
         private String name;
         private Integer age;
         private String sex;
-
+        private Builder(String name){
+            this.name = name;
+        }
         public Builder setName(String name) {
             this.name = name;
             return this;
@@ -46,12 +48,12 @@ public class People {
             return this;
         }
         public People print(){
-            return new People(this);
+            return new People(name, age, sex);
         }
     }
 
     public static void main(String[] args) {
-        People igor = new People.Builder().setName("Igor").setAge(35).setSex("male").print();
+        People igor = new People.Builder("Igor").setAge(35).setSex("male").print();
         igor.printPeople();
     }
 }

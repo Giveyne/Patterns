@@ -1,12 +1,28 @@
 package Builder;
 
 public class Car {
-    public Integer seats;
-    public Integer engine;
-    public boolean tripComputer;
-    public boolean gps;
+    protected Integer seats;
+    protected Integer engine;
+    protected boolean tripComputer;
+    protected boolean gps;
 
-    public void create() {
+    protected void setSeats(Integer seats) {
+        this.seats = seats;
+    }
+
+    protected void setEngine(Integer engine) {
+        this.engine = engine;
+    }
+
+    protected void setTripComputer(boolean tripComputer) {
+        this.tripComputer = tripComputer;
+    }
+
+    protected void setGps(boolean gps) {
+        this.gps = gps;
+    }
+
+    protected void create() {
         System.out.println("Car create \n " +
                 "Your car have:\n " +
                 "Count seats: " + seats + "\n " +
