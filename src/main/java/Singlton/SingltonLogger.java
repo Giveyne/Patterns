@@ -6,7 +6,7 @@ public class SingltonLogger {
 
     public static synchronized SingltonLogger getSingltonLogger() { // создали метод через который внешние пользователи
         if (singltonLogger == null ) // пользователь который захочет создать второй экземпляр не попадет в создание ему вернется уже созданный
-            singltonLogger = new SingltonLogger(); //инициировали экземляр класса (единсвенный потому что статик)
+            singltonLogger = new SingltonLogger(); //инициировали экземляр класса 
         return singltonLogger;
     }
     private SingltonLogger(){} // protect конструктор для того чтобы никто снаружи не смог создать
